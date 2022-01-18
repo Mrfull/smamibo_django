@@ -1,0 +1,65 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+<div class="table-data">
+
+    <table class="table-data__table">
+        {% if outlets %}
+            <tr class="table-data__tr-header">
+                <th>Название торговой точки</th>
+                <th>Скидки</th>
+                <th>Бонусы</th>
+                <th>Адрес</th>
+                <th>GPS координаты</th>
+                <th>Телефон</th>
+                <th>QR код точки</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+                <th>Активная</th>
+            </tr>
+
+            {% for outlet in outlets %}
+                <tr class="table-data__tr">
+                    <td>{{ outlet.name }}</td>
+                    <td>
+                        {% if outlet.discounts %}
+                            <i class="fas fa-check table-data__icon"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if outlet.bonuses %}
+                            <i class="fas fa-check table-data__icon"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{ outlet.address }}</td>
+                    <td class="table-data__td-horizontal">
+                        {{ outlet.gps }}<i class="fas fa-map-marker-alt table-data__icon"></i>
+                    </td>
+                    <td>{{ outlet.phone }}</td>
+                    <td><i class="fas fa-qrcode table-data__icon"></i></td>
+                    <td><a class="table-data__link" href="#">Изменить</a></td>
+                    <td><a class="table-data__link" href="#">Удалить</a></td>
+                    <td>
+                        {% if outlet.active %}
+                            <i class="fas fa-check table-data__icon"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td colspan="999"></td>
+            </tr>
+        {% endif %}
+
+        <tr class="table-data__tr">
+            <td colspan="999">
+                <div class="table-data__td-horizontal table-data__text-left table-data__add-tr">
+                    <i class="fas fa-plus table-data__icon table-data__add-tr-icon"></i>Добавить торговую точку
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
